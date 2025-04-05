@@ -38,6 +38,7 @@ pub enum ToolbarEvent {
     SaveFile,
     CopyClipboard,
     ToggleFill,
+    AnnotationSizeChanged(f32),
 }
 
 #[derive(Debug, Copy, Clone)]
@@ -51,6 +52,8 @@ pub enum StyleToolbarInput {
     ShowColorDialog,
     ColorDialogFinished(Option<Color>),
     ToggleVisibility,
+    SpinButtonChanged(f32),
+    AnnotationResetButtonClicked,
 }
 
 fn create_icon_pixbuf(color: Color) -> Pixbuf {
@@ -376,6 +379,41 @@ impl Component for StyleToolbar {
                 set_tooltip: "Large size",
                 ActionablePlus::set_action::<SizeAction>: Size::Large,
             },
+            //TODO: consider drawer control for the next 3
+            gtk::Label {
+              set_text: "x",
+              set_hexpand: false
+            },
+            #[name = "spin"]
+            gtk::SpinButton {
+                set_widget_name: "spinbutton-annotation-size-factor",
+                set_editable: true,
+                //TODO: it should be possible to focus, so keyboard entry works, but it needs to lose focus for text input.
+                set_can_focus: false,
+                set_hexpand: false,
+
+                set_tooltip: "Annotation Size Factor",
+                set_numeric: true,
+                set_adjustment: &gtk::Adjustment::new(APP_CONFIG.read().annotation_size_factor().into(), 0.0, 100.0, 0.01, 0.1, 0.0),
+                set_climb_rate: 0.1,
+                set_digits: 2,
+                connect_value_changed[sender] => move |button| {
+                    let value = button.value() as f32;
+                    sender.input(StyleToolbarInput::SpinButtonChanged(value));
+                },
+            },
+            //TODO: Reset button is too dark
+            gtk::Button {
+                set_focusable: false,
+                set_hexpand: false,
+
+                set_tooltip: "Reset Annotation Size Factor",
+                set_icon_name: "edit-reset",
+                connect_clicked[sender] => move |_| {
+                    sender.input(StyleToolbarInput::AnnotationResetButtonClicked);
+                }
+            },
+            gtk::Separator {},
             gtk::Button {
                 set_focusable: false,
                 set_hexpand: false,
@@ -395,7 +433,13 @@ impl Component for StyleToolbar {
         },
     }
 
-    fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>, root: &Self::Root) {
+    fn update_with_view(
+        &mut self,
+        widgets: &mut Self::Widgets,
+        message: Self::Input,
+        sender: ComponentSender<Self>,
+        root: &Self::Root,
+    ) {
         match message {
             StyleToolbarInput::ShowColorDialog => {
                 self.show_color_dialog(sender, root.toplevel_window());
@@ -422,8 +466,19 @@ impl Component for StyleToolbar {
                     .emit(ToolbarEvent::ColorSelected(color));
             }
 
+            StyleToolbarInput::SpinButtonChanged(value) => {
+                sender
+                    .output_sender()
+                    .emit(ToolbarEvent::AnnotationSizeChanged(value));
+            }
+
             StyleToolbarInput::ToggleVisibility => {
                 self.visible = !self.visible;
+            }
+            StyleToolbarInput::AnnotationResetButtonClicked => {
+                widgets
+                    .spin
+                    .set_value(APP_CONFIG.read().annotation_size_factor().into());
             }
         }
     }
