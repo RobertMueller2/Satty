@@ -26,6 +26,7 @@ pub struct StyleToolbar {
     custom_color_pixbuf: Pixbuf,
     color_action: SimpleAction,
     visible: bool,
+    annotation_resize_revealed: bool,
 }
 
 #[derive(Debug, Copy, Clone)]
@@ -54,6 +55,7 @@ pub enum StyleToolbarInput {
     ToggleVisibility,
     SpinButtonChanged(f32),
     AnnotationResetButtonClicked,
+    AnnotationRevealButtonClicked,
 }
 
 fn create_icon_pixbuf(color: Color) -> Pixbuf {
@@ -379,14 +381,27 @@ impl Component for StyleToolbar {
                 set_tooltip: "Large size",
                 ActionablePlus::set_action::<SizeAction>: Size::Large,
             },
-            //TODO: consider drawer control for the next 3
-            gtk::Label {
-              set_text: "x",
-              set_hexpand: false
+           gtk::Label {
+               set_focusable: false,
+               set_hexpand: false,
+
+                set_text: "x",
+                set_hexpand: false,
+            },
+            #[name = "spin_revealer"]
+            gtk::Button {
+                set_focusable: false,
+                set_hexpand: false,
+
+                set_label: &format!("{:.2}", APP_CONFIG.read(  ).annotation_size_factor()),
+                set_tooltip: "Edit Annotation Size Factor",
+                set_visible: !model.annotation_resize_revealed,
+                connect_clicked[sender] => move |_| {
+                    sender.input(StyleToolbarInput::AnnotationRevealButtonClicked)  ;
+                }
             },
             #[name = "spin"]
             gtk::SpinButton {
-                set_widget_name: "spinbutton-annotation-size-factor",
                 set_editable: true,
                 //TODO: it should be possible to focus, so keyboard entry works, but it needs to lose focus for text input.
                 set_can_focus: false,
@@ -397,20 +412,35 @@ impl Component for StyleToolbar {
                 set_adjustment: &gtk::Adjustment::new(APP_CONFIG.read().annotation_size_factor().into(), 0.0, 100.0, 0.01, 0.1, 0.0),
                 set_climb_rate: 0.1,
                 set_digits: 2,
+                set_visible: model.annotation_resize_revealed,
                 connect_value_changed[sender] => move |button| {
                     let value = button.value() as f32;
                     sender.input(StyleToolbarInput::SpinButtonChanged(value));
                 },
             },
-            //TODO: Reset button is too dark
+            //TODO: it's too dark
+            #[name = "spin_reset"]
             gtk::Button {
                 set_focusable: false,
                 set_hexpand: false,
 
                 set_tooltip: "Reset Annotation Size Factor",
                 set_icon_name: "edit-reset",
+                set_visible: model.annotation_resize_revealed,
                 connect_clicked[sender] => move |_| {
                     sender.input(StyleToolbarInput::AnnotationResetButtonClicked);
+                },
+            },
+            #[name = "spin_hide"]
+            gtk::Button {
+                set_focusable: false,
+                set_hexpand: false,
+
+                set_label: "hide",
+                set_visible: model.annotation_resize_revealed,
+                set_tooltip: "Hide Annotation Size Factor Editor",
+                connect_clicked[sender] => move |_| {
+                    sender.input(StyleToolbarInput::AnnotationRevealButtonClicked)  ;
                 }
             },
             gtk::Separator {},
@@ -467,6 +497,7 @@ impl Component for StyleToolbar {
             }
 
             StyleToolbarInput::SpinButtonChanged(value) => {
+                widgets.spin_revealer.set_label(&format!("{0:.2}", value));
                 sender
                     .output_sender()
                     .emit(ToolbarEvent::AnnotationSizeChanged(value));
@@ -476,9 +507,24 @@ impl Component for StyleToolbar {
                 self.visible = !self.visible;
             }
             StyleToolbarInput::AnnotationResetButtonClicked => {
+                let default_value = APP_CONFIG.read().annotation_size_factor().into();
+                widgets.spin.set_value(default_value);
                 widgets
-                    .spin
-                    .set_value(APP_CONFIG.read().annotation_size_factor().into());
+                    .spin_revealer
+                    .set_label(&format!("{0:.2}", default_value));
+            }
+            StyleToolbarInput::AnnotationRevealButtonClicked => {
+                self.annotation_resize_revealed = !self.annotation_resize_revealed;
+                widgets.spin.set_visible(self.annotation_resize_revealed);
+                widgets
+                    .spin_reset
+                    .set_visible(self.annotation_resize_revealed);
+                widgets
+                    .spin_revealer
+                    .set_visible(!self.annotation_resize_revealed);
+                widgets
+                    .spin_hide
+                    .set_visible(self.annotation_resize_revealed);
             }
         }
     }
@@ -540,6 +586,7 @@ impl Component for StyleToolbar {
             custom_color_pixbuf,
             color_action: SimpleAction::from(color_action.clone()),
             visible: !APP_CONFIG.read().default_hide_toolbars(),
+            annotation_resize_revealed: false,
         };
 
         // create widgets
