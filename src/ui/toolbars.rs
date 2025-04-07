@@ -425,7 +425,7 @@ impl Component for StyleToolbar {
                 set_hexpand: false,
 
                 set_tooltip: "Reset Annotation Size Factor",
-                set_icon_name: "edit-reset",
+                set_icon_name: "edit-reset-symbolic",
                 set_visible: model.annotation_resize_revealed,
                 connect_clicked[sender] => move |_| {
                     sender.input(StyleToolbarInput::AnnotationResetButtonClicked);
