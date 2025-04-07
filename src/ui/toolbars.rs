@@ -386,7 +386,6 @@ impl Component for StyleToolbar {
                set_hexpand: false,
 
                 set_text: "x",
-                set_hexpand: false,
             },
             #[name = "spin_revealer"]
             gtk::Button {
@@ -418,7 +417,6 @@ impl Component for StyleToolbar {
                     sender.input(StyleToolbarInput::SpinButtonChanged(value));
                 },
             },
-            //TODO: it's too dark
             #[name = "spin_reset"]
             gtk::Button {
                 set_focusable: false,
