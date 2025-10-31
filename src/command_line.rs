@@ -63,11 +63,11 @@ pub struct CommandLine {
     #[arg(short, long)]
     pub default_hide_toolbars: bool,
 
-    /// Experimental (since 0.20.0): Whether to toggle toolbars based on focus. Doesn't affect initial state.
+    /// Experimental (since NEXTREASE): Whether to toggle toolbars based on focus. Doesn't affect initial state.
     #[arg(long)]
     pub focus_toggles_toolbars: bool,
 
-    /// Experimental feature (since 0.20.0): Fill shapes by default
+    /// Experimental feature (since NEXTRELEASE): Fill shapes by default
     #[arg(long)]
     pub default_fill_shapes: bool,
 
