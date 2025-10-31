@@ -23,7 +23,7 @@ export def main [version: string] {
     # update cargo lock
     update_cargo_lock
 
-    # replace NEXT_RELEASE with version
+    # replace NEXTRELEASE with version
     update_next_release src/command_line.rs $requested_version_tag
     update_next_release src/configuration.rs $requested_version_tag
     update_next_release README.md $requested_version_tag
@@ -89,7 +89,7 @@ def update_cargo_lock [] {
 }
 
 def update_next_release [filename: string, version: string] {
-    sed -i -e 's,NEXT_RELEASE,$version,g' $filename
+    sed -i -e 's,NEXTRELEASE,$version,g' $filename
 }
 
 def git_commit [tag: string] {
