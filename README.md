@@ -42,6 +42,7 @@ All configuration is done either at the config file in `XDG_CONFIG_DIR/.config/s
 - `Ctrl+C`: Save to clipboard
 - `Ctrl+S`: Save to specified output file
 - `Ctrl+Shift+S`: Save using file dialog <sup>0.20.0</sup>
+- `Ctrl+Shift+S`: Save using file dialog <sup>NEXTRELEASE</sup>
 - `Ctrl+T`: Toggle toolbars
 - `Ctrl+Y`: Redo
 - `Ctrl+Z`: Undo
@@ -188,7 +189,7 @@ Options:
           Select the tool on startup [aliases: --init-tool] [possible values: pointer, crop, line, arrow, rectangle, ellipse, text, marker, blur, highlight, brush]
       --copy-command <COPY_COMMAND>
           Configure the command to be called on copy, for example `wl-copy`
-      --annotation-size-factor <ANNOTATION_SIZE_FACTOR>
+      --annotation-size-factor <ANNOTATION_SIZE_FACTOR> (since NEXT_RELEASE)
           Increase or decrease the size of the annotations
       --save-after-copy
           After copying the screenshot, save it to a file as well Preferably use the `action_on_copy` option instead
