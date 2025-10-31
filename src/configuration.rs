@@ -18,7 +18,7 @@ use crate::{
     tools::{Highlighters, Tools},
 };
 
-/// since NEXTRELEASE
+/// since $version
 pub static APP_CONFIG: SharedState<Configuration> = SharedState::new();
 
 #[derive(Error, Debug)]

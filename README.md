@@ -42,7 +42,7 @@ All configuration is done either at the config file in `XDG_CONFIG_DIR/.config/s
 - `Ctrl+C`: Save to clipboard
 - `Ctrl+S`: Save to specified output file
 - `Ctrl+Shift+S`: Save using file dialog <sup>0.20.0</sup>
-- `Ctrl+Shift+S`: Save using file dialog <sup>NEXTRELEASE</sup>
+- `Ctrl+Shift+S`: Save using file dialog <sup>$version</sup>
 - `Ctrl+T`: Toggle toolbars
 - `Ctrl+Y`: Redo
 - `Ctrl+Z`: Undo

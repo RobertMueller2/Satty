@@ -67,7 +67,7 @@ pub struct CommandLine {
     #[arg(long)]
     pub focus_toggles_toolbars: bool,
 
-    /// Experimental feature (since NEXTRELEASE): Fill shapes by default
+    /// Experimental feature (since $version): Fill shapes by default
     #[arg(long)]
     pub default_fill_shapes: bool,
 
