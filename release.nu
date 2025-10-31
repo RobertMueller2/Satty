@@ -21,7 +21,19 @@ export def main [version: string] {
     patch_cargo_toml $requested_version
 
     # update cargo lock
-    update_cargo_lock 
+    update_cargo_lock
+
+    # replace NEXT_RELEASE with version
+    update_next_release src/command_line.rs $requested_version_tag
+    update_next_release src/configuration.rs $requested_version_tag
+    update_next_release README.md $requested_version_tag
+
+    # show diff so we can review the replacements
+    git_diff
+
+    if ((input "Proceed with commit? (Y/n) " --numchar 1 --default "Y") | str downcase) == "n" {
+        exit 1
+    }
 
     # commit 
     git_commit $requested_version_tag
@@ -36,7 +48,6 @@ export def main [version: string] {
     # the rest is being handled by the github release action
 }
 
-
 def echo_section_headline []: string -> nothing {
     print $"\n(ansi yellow)++ ($in)(ansi reset)"
 }
@@ -46,6 +57,10 @@ def assert_repo_is_clean [] {
         print "The git repository is not clean! Aborting..."
         exit 1
     } else {}
+}
+
+def git_diff [] {
+    git diff
 }
 
 def git_tag [tag: string] {
@@ -71,6 +86,10 @@ def patch_cargo_toml [version: list<int>] {
 def update_cargo_lock [] {
     "Updating Cargo.lock" | echo_section_headline
     cargo generate-lockfile
+}
+
+def update_next_release [filename: string, version: string] {
+    sed -i -e 's,NEXT_RELEASE,$version,g' $filename
 }
 
 def git_commit [tag: string] {
