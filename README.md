@@ -94,9 +94,11 @@ Default single-key shortcuts:
 [general]
 # Start Satty in fullscreen mode
 fullscreen = true
-# Exit directly after copy/save action. NEXTRELEASE: Does not apply to save as
+# Exit directly after save action. NEXTRELEASE: Does no longer apply to copy or save as
 early-exit = true
-# Exit directly after save as (NEXTRELEASE)
+# Exit directly after copy action. (Experimental, NEXTRELEASE)
+early-exit-copy = true
+# Exit directly after save as (Experimental, NEXTRELEASE)
 early-exit-save-as = true
 # Draw corners of rectangles round if the value is greater than 0 (0 disables rounded corners)
 corner-roundness = 12
@@ -226,7 +228,9 @@ Options:
   -o, --output-filename <OUTPUT_FILENAME>
           Filename to use for saving action or '-' to print to stdout. Omit to disable saving to file. Might contain format specifiers: <https://docs.rs/chrono/latest/chrono/format/strftime/index.html>. Since 0.20.0, can contain tilde (~) for home dir
       --early-exit
-          Exit directly after copy/save action. NEXTRELEASE: This does not apply to "save as"
+          Exit directly after save action. NEXTRELEASE: This does not apply to "save as" and "copy"
+      --early-exit-copy
+          Experimental (NEXTRELEASE): Exit directly after copy action
       --early-exit-save-as
           Experimental (NEXTRELEASE): Exit directly after save as
       --corner-roundness <CORNER_ROUNDNESS>
