@@ -62,6 +62,8 @@ pub struct Configuration {
     pan_step_size: f32,
     text_move_length: f32,
     input_scale: f32,
+    title: Option<String>,
+    app_id: Option<String>,
 }
 
 pub struct Keybinds {
@@ -313,6 +315,12 @@ impl Configuration {
         if let Some(v) = general.input_scale {
             self.input_scale = v;
         }
+        if let Some(v) = general.title {
+            self.title = Some(v);
+        }
+        if let Some(v) = general.app_id {
+            self.app_id = Some(v);
+        }
 
         // --- deprecated options ---
         if let Some(v) = general.right_click_copy {
@@ -427,6 +435,12 @@ impl Configuration {
         }
         if let Some(v) = command_line.input_scale {
             self.input_scale = v;
+        }
+        if let Some(v) = command_line.title {
+            self.title = Some(v);
+        }
+        if let Some(v) = command_line.app_id {
+            self.app_id = Some(v);
         }
 
         // --- deprecated options ---
@@ -551,8 +565,17 @@ impl Configuration {
     pub fn text_move_length(&self) -> f32 {
         self.text_move_length
     }
+
     pub fn input_scale(&self) -> f32 {
         self.input_scale
+    }
+
+    pub fn title(&self) -> Option<&String> {
+        self.title.as_ref()
+    }
+
+    pub fn app_id(&self) -> Option<&String> {
+        self.app_id.as_ref()
     }
 }
 
@@ -587,6 +610,8 @@ impl Default for Configuration {
             pan_step_size: 50.,
             text_move_length: 50.0,
             input_scale: 1.0,
+            title: None,
+            app_id: None,
         }
     }
 }
@@ -665,6 +690,8 @@ struct ConfigurationFileGeneral {
     pan_step_size: Option<f32>,
     text_move_length: Option<f32>,
     input_scale: Option<f32>,
+    title: Option<String>,
+    app_id: Option<String>,
 
     // --- deprecated options ---
     right_click_copy: Option<bool>,

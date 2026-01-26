@@ -150,6 +150,11 @@ text-move-length = 50.0
 # experimental feature (NEXTRELEASE): Scale factor on the input image when it was taken (e.g. DPI scale on the monitor it was recorded from).
 # This may be more useful to set via the command line.
 input-scale = 2.0
+# experimental feature (NEXTRELEASE): set window title
+title = "Satty"
+# experimental feature (NEXTRELEASE): set app_id, note this has to match D-Bus well-known name format, otherwise GTK does not accept it.
+app-id = "org.satty.satty"
+
 
 # Tool selection keyboard shortcuts (since 0.20.0)
 [keybinds]
@@ -273,6 +278,10 @@ Options:
           Experimental feature (NEXTRELEASE): The length to move the text when using the arrow keys. defaults to 50.0
       --input-scale <INPUT_SCALE>
           Experimental feature (NEXTRELEASE): Scale the default window size to fit different displays
+      --title <TITLE>
+          Experimental feature (NEXTRELEASE): Set window title
+      --app-id <APP_ID>
+          Experimental feature (NEXTRELEASE): Set toplevel app_id. Note that this applies gtk format expectations
       --right-click-copy
           Right click to copy. Preferably use the `action_on_right_click` option instead
       --action-on-enter <ACTION_ON_ENTER>
