@@ -39,6 +39,7 @@ mod ellipse;
 mod highlight;
 mod line;
 mod marker;
+mod pixelate;
 mod pointer;
 mod rectangle;
 mod text;
@@ -257,6 +258,7 @@ pub use ellipse::EllipseTool;
 pub use highlight::{HighlightTool, Highlighters};
 pub use line::LineTool;
 pub use pointer::PointerTool;
+pub use pixelate::PixelateTool;
 pub use rectangle::RectangleTool;
 pub use text::TextTool;
 
@@ -287,6 +289,7 @@ pub enum Tools {
     Blur = 8,
     Highlight = 9,
     Brush = 10,
+    Pixelate = 11,
 }
 
 impl fmt::Display for Tools {
@@ -303,6 +306,7 @@ impl fmt::Display for Tools {
             Tools::Marker => "Marker",
             Tools::Blur => "Blur",
             Tools::Highlight => "Highlight",
+            Tools::Pixelate => "Pixelate",
         };
         write!(f, "{}", name)
     }
@@ -328,6 +332,7 @@ impl FromStr for Tools {
             "blur" => Ok(Self::Blur),
             "highlight" => Ok(Self::Highlight),
             "brush" => Ok(Self::Brush),
+            "pixelate" => Ok(Self::Pixelate),
             _ => Err(ParseCommandError),
         }
     }
@@ -357,6 +362,10 @@ impl ToolsManager {
         let text_tool = Rc::new(RefCell::new(TextTool::default()));
         tools.insert(Tools::Text, text_tool.clone());
         tools.insert(Tools::Blur, Rc::new(RefCell::new(BlurTool::default())));
+        tools.insert(
+            Tools::Pixelate,
+            Rc::new(RefCell::new(PixelateTool::default())),
+        );
         tools.insert(
             Tools::Highlight,
             Rc::new(RefCell::new(HighlightTool::default())),
@@ -425,6 +434,7 @@ impl FromVariant for Tools {
             8 => Some(Tools::Blur),
             9 => Some(Tools::Highlight),
             10 => Some(Tools::Brush),
+            11 => Some(Tools::Pixelate),
             _ => None,
         })
     }
@@ -442,6 +452,7 @@ impl From<command_line::Tools> for Tools {
             command_line::Tools::Text => Self::Text,
             command_line::Tools::Marker => Self::Marker,
             command_line::Tools::Blur => Self::Blur,
+            command_line::Tools::Pixelate => Self::Pixelate,
             command_line::Tools::Highlight => Self::Highlight,
             command_line::Tools::Brush => Self::Brush,
         }
