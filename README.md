@@ -55,10 +55,10 @@ All configuration is done either at the config file in `XDG_CONFIG_DIR/.config/s
 - <kbd>Alt</kbd>+(<kbd>Left</kbd>/<kbd>Right</kbd>/<kbd>Up</kbd>/<kbd>Down</kbd>): Pan, also available with middle mouse button drag <sup>0.20.1</sup>
 
 Mouse:
-- <kbd>Ctrl+Wheel</kbd>: Zoom in/out <sup>NEXTRELEASE</sup>
+- <kbd>Ctrl+Wheel</kbd>: Zoom in/out <sup>0.99.9</sup>
 - <kbd>Middle</kbd>: Pan
 
-Touchpad: <sup>NEXTRELEASE</sup>
+Touchpad: <sup>0.99.9</sup>
 - <kbd>Pinch</kbd>: Zoom (two finger)
 - <kbd>Ctrl+Scroll</kbd>: Zoom in/out  (two finger scroll)
 - <kbd>Scroll</kbd>: Pan  (two finger scroll)
@@ -69,7 +69,7 @@ Touchpad: <sup>NEXTRELEASE</sup>
 
 If out of range select custom color <sup>0.21.0</sup>
 
-#### Size Selection <sup>NEXTRELEASE</sup>
+#### Size Selection <sup>0.99.9</sup>
 
 In the bottom toolbar the size can be edited directly or by + and - buttons.
 Minimum is 0.1 and maximum to 99.99.
@@ -105,7 +105,7 @@ Crop:
 Arrow and line:
 - <kbd>Shift</kbd> to make tool snap to 15° steps.
 
-Rectangle, ellipse, blur <sup>NEXTRELEASE</sup> and highlight block mode<sup>NEXTRELEASE</sup>: 
+Rectangle, ellipse, blur <sup>0.99.9</sup> and highlight block mode<sup>0.99.9</sup>: 
 - <kbd>Alt</kbd> to center the tool around origin.
 - <kbd>Shift</kbd> to make width and high uniform - results in square resp. circle.
 - Hold both to combine them.
@@ -125,7 +125,7 @@ Text:
 - <kbd>Alt+Ctrl</kbd> with <kbd>Left</kbd> or <kbd>Right</kbd> or <kbd>Up</kbd> or <kbd>Down</kbd> to move the text. Use <kbd>Alt+Ctrl+Shift</kbd> with arrow keys to nudge the text. <sup>0.20.1</sup>
 
 Marker:
-- Hold <kbd>Alt</kbd> to get extra ring. <sup>NEXTRELEASE</sup>
+- Hold <kbd>Alt</kbd> to get extra ring. <sup>0.99.9</sup>
 
 Highlight: 
 - Hold <kbd>Ctrl</kbd> to switch between block and freehand mode (default configurable, see below).
