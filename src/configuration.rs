@@ -20,7 +20,8 @@ use crate::{
 };
 
 use satty_cli::command_line::{
-    Action as CommandLineAction, CommandLine, EarlyExitTriggers, Fullscreen, Resize,
+    Action as CommandLineAction, CommandLine, EarlyExitTriggers, Fullscreen, NotificationIcon,
+    Resize,
 };
 
 pub static APP_CONFIG: SharedState<Configuration> = SharedState::new();
@@ -72,6 +73,7 @@ pub struct Configuration {
     input_scale: Option<f32>,
     title: Option<String>,
     app_id: Option<String>,
+    notification_icon: NotificationIcon,
 }
 
 pub struct Keybinds {
@@ -424,6 +426,10 @@ impl Configuration {
             self.app_id = Some(v);
         }
 
+        if let Some(notification_icon) = general.notification_icon {
+            self.notification_icon = notification_icon;
+        }
+
         // --- deprecated options ---
         if let Some(v) = general.right_click_copy
             && v
@@ -555,6 +561,9 @@ impl Configuration {
         }
         if let Some(v) = command_line.app_id {
             self.app_id = Some(v);
+        }
+        if let Some(v) = command_line.notification_icon {
+            self.notification_icon = v;
         }
 
         // --- deprecated options ---
@@ -718,6 +727,10 @@ impl Configuration {
     pub fn app_id(&self) -> Option<&String> {
         self.app_id.as_ref()
     }
+
+    pub fn notification_icon(&self) -> NotificationIcon {
+        self.notification_icon
+    }
 }
 
 impl Default for Configuration {
@@ -757,6 +770,7 @@ impl Default for Configuration {
             input_scale: None,
             title: None,
             app_id: None,
+            notification_icon: NotificationIcon::default(),
         }
     }
 }
@@ -841,6 +855,7 @@ struct ConfigurationFileGeneral {
     input_scale: Option<f32>,
     title: Option<String>,
     app_id: Option<String>,
+    notification_icon: Option<NotificationIcon>,
 
     // --- deprecated options ---
     right_click_copy: Option<bool>,

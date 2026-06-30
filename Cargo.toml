@@ -48,6 +48,7 @@ glow = "0.17.0"
 resource = "0.6.1"  # font emedding
 fontconfig = "0.10.2"  # font loading
 keycode = "1.0.0"
+gio = "0.21.5"
 
 [dependencies.relm4-icons]
 version = "0.10.0"

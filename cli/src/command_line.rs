@@ -159,6 +159,10 @@ pub struct CommandLine {
     #[arg(long)]
     pub app_id: Option<String>,
 
+    /// Experimental feature (NEXTRELEASE): use preview in some notifications
+    #[arg(long)]
+    pub notification_icon: Option<NotificationIcon>,
+
     // --- deprecated options ---
     /// Right click to copy.
     /// Preferably use the `action_on_right_click` option instead.
@@ -213,6 +217,16 @@ pub enum EarlyExitTriggers {
     Copy,
     Save,
     SaveAs,
+}
+
+#[derive(Debug, Clone, Copy, Default, ValueEnum, Deserialize, PartialEq, Eq)]
+#[value(rename_all = "kebab-case")]
+#[serde(rename_all = "kebab-case")]
+pub enum NotificationIcon {
+    #[default]
+    AppIcon,
+    ThumbnailFileIcon,
+    ThumbnailIcon,
 }
 
 #[derive(Debug, Clone, Copy, Default, ValueEnum)]
