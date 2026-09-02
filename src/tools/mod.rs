@@ -176,6 +176,11 @@ pub trait Drawable: DrawableClone + Debug {
     fn get_rendering_mode(&self) -> RenderingMode {
         RenderingMode::Default
     }
+
+    fn is_renderable(&self) -> bool {
+        true
+    }
+
     fn bounds_only_valid_after_redraw(&self) -> bool {
         false
     }
