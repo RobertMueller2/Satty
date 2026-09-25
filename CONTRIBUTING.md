@@ -3,7 +3,7 @@ CONTRIBUTING
 
 Contributions are welcome. Satty is not able to evolve without relying on its contributors and their contributions.
 
-We're always looking for and grateful about help with e.g. documentation/README, PRs, PR reviews, FAQ or other wiki entries.
+We're always looking for and are grateful about help with e.g. documentation/README, PRs, PR reviews, FAQ or other wiki entries.
 
 This documents tries to reduce friction when it comes to contributions by defining some guidelines, some of which may follow a rationale while others are arbitrary determinations.
 

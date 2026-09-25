@@ -23,7 +23,6 @@ Bug reports
 
 Please make sure the described bug actually exists. A bug report should mainly consist of a concise list of repro steps, expected result, observed result. It should be sparse with regards to additional noise, fluff and formatting.
 
-
 Pull Requests
 --
 
