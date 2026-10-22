@@ -50,6 +50,7 @@ glow = "0.18.0"
 resource = "0.6.1"  # font emedding
 fontconfig = "0.11.0"  # font loading
 keycode = "1.0.0"
+native-dialog.workspace = true
 
 [dependencies.relm4-icons]
 version = "0.11.0"
@@ -80,3 +81,4 @@ license = "MPL-2.0"
 clap = { version = "4.6.6", features = ["derive"] }
 satty_cli = { path = "cli", version = "0.22.0" }
 serde = { version = "1.0", features = ["derive"] }
+native-dialog = "0.9.7"
