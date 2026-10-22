@@ -1175,7 +1175,7 @@ impl Tool for TextTool {
                             let display = DisplayManager::get().default_display();
                             if display.is_none() {
                                 log(
-                                    &format!("Cannot open default display for clipboard."),
+                                    "Cannot open default display for clipboard.",
                                     LogLevel::Error,
                                     LogSeverity::Normal,
                                 );
@@ -1198,7 +1198,7 @@ impl Tool for TextTool {
                             let display = DisplayManager::get().default_display();
                             if display.is_none() {
                                 log(
-                                    &format!("Cannot open default display for clipboard."),
+                                    "Cannot open default display for clipboard.",
                                     LogLevel::Error,
                                     LogSeverity::Normal,
                                 );
@@ -1222,7 +1222,7 @@ impl Tool for TextTool {
                         let display = DisplayManager::get().default_display();
                         if display.is_none() {
                             log(
-                                &format!("Cannot open default display for clipboard."),
+                                "Cannot open default display for clipboard.",
                                 LogLevel::Error,
                                 LogSeverity::Normal,
                             );
@@ -1245,7 +1245,7 @@ impl Tool for TextTool {
                                 }
                                 Ok(None) => {
                                     log(
-                                        &format!("selection_clipboard contains no text"),
+                                        "selection_clipboard contains no text",
                                         LogLevel::Info,
                                         LogSeverity::Low,
                                     );
@@ -1398,7 +1398,7 @@ impl Tool for TextTool {
                         let display = DisplayManager::get().default_display();
                         if display.is_none() {
                             log(
-                                &format!("Cannot open default display for clipboard."),
+                                "Cannot open default display for clipboard.",
                                 LogLevel::Error,
                                 LogSeverity::Normal,
                             );

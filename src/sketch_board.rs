@@ -1417,7 +1417,7 @@ impl SketchBoard {
     fn handle_paste_image(&self, sender: ComponentSender<Self>) -> ToolUpdateResult {
         let Some(display) = DisplayManager::get().default_display() else {
             log(
-                &format!("Cannot open default display for clipboard."),
+                "Cannot open default display for clipboard.",
                 LogLevel::Error,
                 LogSeverity::High,
             );

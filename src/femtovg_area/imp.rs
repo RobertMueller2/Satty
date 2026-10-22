@@ -982,7 +982,7 @@ impl FemtoVgAreaMut {
             Ok(id) => Some(id),
             Err(_) => {
                 log(
-                    &format!("Could not create transparency background image"),
+                    "Could not create transparency background image",
                     LogLevel::Error,
                     LogSeverity::Normal,
                 );

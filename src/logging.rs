@@ -43,9 +43,9 @@ pub enum LogSeverity {
     Urgent,
 }
 
-impl Into<gio::NotificationPriority> for LogSeverity {
-    fn into(self) -> gio::NotificationPriority {
-        match self {
+impl From<LogSeverity> for gio::NotificationPriority {
+    fn from(val: LogSeverity) -> Self {
+        match val {
             LogSeverity::Urgent => gio::NotificationPriority::Urgent,
             LogSeverity::High => gio::NotificationPriority::High,
             LogSeverity::Normal => gio::NotificationPriority::Normal,
@@ -68,7 +68,7 @@ pub fn log(msg: &str, level: LogLevel, severity: LogSeverity) {
 
     if severity >= LogSeverity::High {
         if !can_read_config || !has_gtk {
-            let _ = DialogBuilder::message()
+            DialogBuilder::message()
                 .set_level(level.into())
                 .set_title(format!("{level}"))
                 .set_text(msg)
