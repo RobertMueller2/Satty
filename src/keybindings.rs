@@ -368,7 +368,7 @@ impl ShortcutRegistry {
         if let Some(command) = self.key_bindings.get(&key_binding) {
             Some(*command)
         } else if !modifier_only {
-            eprintln!("\"{}\" is not bound to a command or tool", key_binding);
+            log(&format!("\"{}\" is not bound to a command or tool", key_binding), LogLevel::Warn, LogSeverity::Low);
             None
         } else {
             None
