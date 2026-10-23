@@ -22,7 +22,6 @@ use crate::{
 };
 
 use super::{Drawable, DrawableClone, InputContext, Tool, ToolUpdateResult, Tools};
-use crate::logging::LogSeverity;
 use crate::sketch_board::SketchBoardInput;
 use relm4::Sender;
 use relm4::gtk::gdk::DisplayManager;
@@ -1127,7 +1126,6 @@ impl Tool for TextTool {
                         log(
                             "Cannot open default display for clipboard.",
                             LogLevel::Error,
-                            LogSeverity::Normal,
                         );
                         return ToolUpdateResult::StopPropagation;
                     }
@@ -1148,18 +1146,10 @@ impl Tool for TextTool {
                                 }
                             }
                             Ok(None) => {
-                                log(
-                                    "Clipboard contains no text",
-                                    LogLevel::Info,
-                                    LogSeverity::Low,
-                                );
+                                log("Clipboard contains no text", LogLevel::Info);
                             }
                             Err(err) => {
-                                log(
-                                    &format!("Clipboard read error: {}", err),
-                                    LogLevel::Error,
-                                    LogSeverity::Normal,
-                                );
+                                log(&format!("Clipboard read error: {}", err), LogLevel::Error);
                             }
                         }
                     });
@@ -1177,7 +1167,6 @@ impl Tool for TextTool {
                                 log(
                                     "Cannot open default display for clipboard.",
                                     LogLevel::Error,
-                                    LogSeverity::Normal,
                                 );
                                 return ToolUpdateResult::StopPropagation;
                             }
@@ -1200,7 +1189,6 @@ impl Tool for TextTool {
                                 log(
                                     "Cannot open default display for clipboard.",
                                     LogLevel::Error,
-                                    LogSeverity::Normal,
                                 );
                                 return ToolUpdateResult::StopPropagation;
                             }
@@ -1224,7 +1212,6 @@ impl Tool for TextTool {
                             log(
                                 "Cannot open default display for clipboard.",
                                 LogLevel::Error,
-                                LogSeverity::Normal,
                             );
                             return ToolUpdateResult::StopPropagation;
                         }
@@ -1244,17 +1231,12 @@ impl Tool for TextTool {
                                     }
                                 }
                                 Ok(None) => {
-                                    log(
-                                        "selection_clipboard contains no text",
-                                        LogLevel::Info,
-                                        LogSeverity::Low,
-                                    );
+                                    log("selection_clipboard contains no text", LogLevel::Info);
                                 }
                                 Err(err) => {
                                     log(
                                         &format!("selection_clipboard read error: {}", err),
                                         LogLevel::Error,
-                                        LogSeverity::Normal,
                                     );
                                 }
                             }
@@ -1400,7 +1382,6 @@ impl Tool for TextTool {
                             log(
                                 "Cannot open default display for clipboard.",
                                 LogLevel::Error,
-                                LogSeverity::Normal,
                             );
                             return ToolUpdateResult::StopPropagation;
                         }
@@ -1423,17 +1404,12 @@ impl Tool for TextTool {
                                     }
                                 }
                                 Ok(None) => {
-                                    log(
-                                        "selection_clipboard contains no text",
-                                        LogLevel::Info,
-                                        LogSeverity::Low,
-                                    );
+                                    log("selection_clipboard contains no text", LogLevel::Info);
                                 }
                                 Err(err) => {
                                     log(
                                         &format!("selection_clipboard read error: {}", err),
                                         LogLevel::Error,
-                                        LogSeverity::Normal,
                                     );
                                 }
                             }
